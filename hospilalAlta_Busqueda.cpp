@@ -17,7 +17,7 @@ struct nodo{
 //Declaracion de funcione
 void Altapaciente(nodo *&, string , string , int , string , char , string , string );
 void buscarPaciente(nodo *, string, string, int, string, char, string, string);
-void consultarpacientes(nodo *);
+
 void bajapaciente(nodo *&, string);
 //Declaracion de la clase proncipal//
 int main(){
@@ -115,7 +115,7 @@ int main(){
 			gotoxy(62,6);cout<<"Sexo";
 			gotoxy(77,6);cout<<"Fecha";
 			gotoxy(92,6);cout<<"Enfermedad";
-			consultarpacientes(lista);
+		
 		break;
 		//caso 4
 		case 4:
@@ -222,6 +222,7 @@ int main(){
 	        cout<<"\nDesea regresar al menu s/n: ";
 			cin>>res;
 	}while(res!='n');
+	return 0;
 }
 
 void Altapaciente(nodo *&lista,string nm, string n, int e, string d, char sx, string f, string en){
@@ -282,4 +283,30 @@ void buscarPaciente(nodo *lista, string numseg , string nombre, int edad, string
 	else{
 	  gotoxy(24,11);cout<<"     EL PACIENTE CON EL NSS: "<<numseg<<" NO SE ENCONTRO EN LA LISTA   ";
 	}
+	
 }
+
+
+
+void bajapaciente(nodo *&lista, string numseg) {
+	if (lista != NULL){
+		nodo *aux_borrar;
+		nodo *anterior = NULL;
+		aux_borrar=lista;
+		while ((aux_borrar != NULL)&&(aux_borrar->numseg != numseg)){
+			
+			anterior=aux_borrar;
+			aux_borrar=aux_borrar ->siguiente;
+		}
+		if(aux_borrar == NULL){
+			cout<<"Elemento NO existe";
+		}else if(anterior == NULL){
+			lista = lista->siguiente;
+			delete aux_borrar;
+		}else {
+			anterior -> siguiente =aux_borrar -> siguiente;
+			delete aux_borrar;
+		}	
+	}	
+}
+
